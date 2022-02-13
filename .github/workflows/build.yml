@@ -22,7 +22,7 @@ jobs:
           path: 'pkgscripts-ng'
 
       - name: Deploy build environment
-        run: ./EnvDeploy -v 7.0 -p armada38x
+        run: sudo ./EnvDeploy -v 7.0 -p armada38x
         working-directory: 'pkgscripts-ng'
 
       - name: Build
