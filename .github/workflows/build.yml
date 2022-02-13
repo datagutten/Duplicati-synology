@@ -26,7 +26,7 @@ jobs:
         working-directory: 'pkgscripts-ng'
 
       - name: Build
-        run: ./PkgCreate.py -v 7.0 -p armada38x ../source
+        run: sudo ./PkgCreate.py -v 7.0 -p armada38x ../source
         working-directory: 'pkgscripts-ng'
 
       - uses: actions/upload-artifact@v2
