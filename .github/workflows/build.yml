@@ -31,6 +31,10 @@ jobs:
           restore-keys: |
             tarballs-
 
+      - name: Get CA certificates
+        run: wget https://curl.se/ca/cacert.pem
+        working-directory: 'build_scripts'
+
       - name: Deploy build environment
         run: sudo ./EnvDeploy -v 7.0 -p armada38x
         working-directory: 'build/pkgscripts-ng'
