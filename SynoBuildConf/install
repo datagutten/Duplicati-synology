@@ -22,6 +22,9 @@ create_package_tgz() {
 
 	### install needed file into PKG_DIR
 	unzip -q -d "${package_tgz_dir}" "duplicati.zip"
+	status=$?
+	echo "Unzip status ${status}"
+	ls /tmp/_package_tgz
 	#mkdir -p $binary_dir
 	mkdir "WIZARD_UIFILES" # Not used, but need to exist
 
