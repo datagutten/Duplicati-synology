@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  ZIP_URL: 'https://updates.duplicati.com/beta/duplicati-2.0.6.3_beta_2021-06-17.zip'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,6 +25,11 @@ jobs:
         with:
           path: 'build/source/Duplicati'
 
+      - name: Run build script
+        run: 'build_scripts/build.py'
+        with:
+          path: 'build/source/Duplicati'
+
       - name: Cache toolkit tarballs
         id: composer-cache
         uses: actions/cache@v2
@@ -34,6 +42,11 @@ jobs:
       - name: Get CA certificates
         run: wget https://curl.se/ca/cacert.pem
         working-directory: 'build/source/Duplicati/build_scripts'
+
+      - name: Download zip
+        run: wget -q -o duplicati.zip $ZIP_URL
+        with:
+          path: 'build/source/Duplicati'
 
       - name: Deploy build environment
         run: sudo ./EnvDeploy -v 7.0 -p armada38x
