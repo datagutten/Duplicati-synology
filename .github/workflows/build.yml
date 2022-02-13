@@ -13,21 +13,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          path: 'source'
+          path: 'duplicati_package'
       - uses: actions/checkout@v2
         name: 'Checkout build scripts'
         with:
           repository: 'SynologyOpenSource/pkgscripts-ng'
           ref: 'DSM7.0'
-          path: 'pkgscripts-ng'
+          path: 'build/pkgscripts-ng'
 
       - name: Deploy build environment
         run: sudo ./EnvDeploy -v 7.0 -p armada38x
-        working-directory: 'pkgscripts-ng'
+        working-directory: 'build/pkgscripts-ng'
 
       - name: Build
-        run: sudo ./PkgCreate.py -v 7.0 -p armada38x ../source
-        working-directory: 'pkgscripts-ng'
+        run: sudo ./PkgCreate.py -v 7.0 -p armada38x ../../duplicati_package
+        working-directory: 'build/pkgscripts-ng'
 
       - uses: actions/upload-artifact@v2
         with:
