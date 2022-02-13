@@ -1,0 +1,8 @@
+{
+    "usr-local-linker": {
+        "bin": [
+            "bin/duplicati-cli",
+            "bin/duplicati-server"
+        ]
+    }
+}

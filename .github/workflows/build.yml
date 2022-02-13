@@ -1,0 +1,35 @@
+name: Build SPK
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: 'source'
+      - uses: actions/checkout@v2
+        name: 'Checkout build scripts'
+        with:
+          repository: 'SynologyOpenSource/pkgscripts-ng'
+          ref: 'DSM7.0'
+          path: 'pkgscripts-ng'
+
+      - name: Deploy build environment
+        run: ./EnvDeploy -v 7.0 -p armada38x
+        working-directory: 'pkgscripts-ng'
+
+      - name: Build
+        run: ./PkgCreate.py -v 7.0 -p armada38x ../source
+        working-directory: 'pkgscripts-ng'
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Duplicati
+          path: build_env/ds.armada38x-7.0/image/packages

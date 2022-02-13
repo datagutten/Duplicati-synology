@@ -1,0 +1,14 @@
+#!/bin/sh
+mkdir -p "${SYNOPKG_PKGDEST}/bin"
+
+echo "mono ${SYNOPKG_PKGDEST}/Duplicati.CommandLine.exe $@" > "${SYNOPKG_PKGDEST}/bin/duplicati-cli" 
+chmod +x "${SYNOPKG_PKGDEST}/bin/duplicati-cli"
+echo "mono ${SYNOPKG_PKGDEST}/Duplicati.Server.exe $@" > "${SYNOPKG_PKGDEST}/bin/duplicati-server"
+chmod +x "${SYNOPKG_PKGDEST}/bin/duplicati-server"
+
+
+# echo "" >> "${SYNOPKG_PKGDEST}/webroot/nph-proxy.cgi"
+# echo "mono ${SYNOPKG_PKGDEST}/CGIProxyHandler.exe" >> "${SYNOPKG_PKGDEST}/webroot/nph-proxy.cgi"
+# chmod +x "${SYNOPKG_PKGDEST}/webroot/nph-proxy.cgi"
+
+exit 0
