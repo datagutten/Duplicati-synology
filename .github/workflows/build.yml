@@ -33,7 +33,7 @@ jobs:
 
       - name: Get CA certificates
         run: wget https://curl.se/ca/cacert.pem
-        working-directory: 'build_scripts'
+        working-directory: 'build/source/Duplicati/build_scripts'
 
       - name: Deploy build environment
         run: sudo ./EnvDeploy -v 7.0 -p armada38x
