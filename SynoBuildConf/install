@@ -59,7 +59,7 @@ create_spk(){
 	cp -av LICENSE $PKG_DIR
 
 	./INFO.sh > INFO
-	echo "version=\"$(cat VERSION)\"" > INFO
+	echo "version=\"$(cat VERSION)\"" >> INFO
 	cp INFO $PKG_DIR/INFO
 
 	### Create the final spk.
