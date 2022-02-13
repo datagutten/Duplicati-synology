@@ -20,7 +20,7 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          path: 'build/pkgscripts-ng/source/Duplicati'
+          path: 'build/source/Duplicati'
 
       - name: Cache toolkit tarballs
         id: composer-cache
