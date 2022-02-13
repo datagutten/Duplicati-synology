@@ -44,8 +44,7 @@ jobs:
 
       - name: Download zip
         run: wget -q -o duplicati.zip $ZIP_URL
-        with:
-          path: 'build/source/Duplicati'
+        working-directory: 'build/source/Duplicati'
 
       - name: Deploy build environment
         run: sudo ./EnvDeploy -v 7.0 -p armada38x
