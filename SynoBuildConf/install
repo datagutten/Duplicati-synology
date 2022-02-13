@@ -14,6 +14,9 @@ create_package_tgz() {
 	local package_tgz_dir=/tmp/_package_tgz
 	local binary_dir=$package_tgz_dir/usr/local/bin
 
+	pwd
+	ls -l
+
 	### clear destination directory
 	rm -rf $package_tgz_dir && mkdir -p $package_tgz_dir
 
