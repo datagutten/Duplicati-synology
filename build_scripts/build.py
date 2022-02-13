@@ -13,7 +13,7 @@ os.mkdir(folder)
 local_zip = os.path.join(folder, 'duplicati_%s.zip' % version)
 
 if not os.path.exists(local_zip):
-    status = subprocess.call(['wget', '--ca-certificate', 'cacert.pem', '-O', local_zip, url])
+    status = subprocess.call(['wget', '--no-check-certificate', '-O', local_zip, url])
     if status != 0:
         sys.exit(status)
 
