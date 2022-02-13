@@ -21,6 +21,7 @@ create_package_tgz() {
 	# unzip -q -d "${package_tgz_dir}" "duplicati-2.0.6.3_beta_2021-06-17.zip"
 	cp -av /tmp/_duplicati_spk_build/* $package_tgz_dir
 	#mkdir -p $binary_dir
+	mkdir "WIZARD_UIFILES" # Not used, but need to exist
 
 	# cp -av web-extra $package_tgz_dir
 
