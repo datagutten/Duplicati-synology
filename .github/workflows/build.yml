@@ -22,6 +22,15 @@ jobs:
         with:
           path: 'build/pkgscripts-ng/source/Duplicati'
 
+      - name: Cache toolkit tarballs
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: tarballs-${{ hashFiles('build/toolkit_tarballs/*.txz') }}
+          restore-keys: |
+            tarballs-
+
       - name: Deploy build environment
         run: sudo ./EnvDeploy -v 7.0 -p armada38x
         working-directory: 'build/pkgscripts-ng'
