@@ -27,8 +27,7 @@ jobs:
 
       - name: Run build script
         run: 'build_scripts/build.py'
-        with:
-          path: 'build/source/Duplicati'
+        working-directory: 'build/source/Duplicati'
 
       - name: Cache toolkit tarballs
         id: composer-cache
