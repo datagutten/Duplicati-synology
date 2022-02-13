@@ -1,4 +1,5 @@
 #!/bin/bash
 /usr/bin/python3 build_scripts/build.py
 status=$?
+echo "Python exit code $status"
 exit $status
