@@ -16,6 +16,7 @@ support_center="no"
 install_dep_services="mono"
 start_dep_services="mono"
 description="Use Duplicati to backup your data to cloud services"
+adminport="8200"
 
 # version="1.0.0-0001"
 os_min_ver="7.0-40000"
