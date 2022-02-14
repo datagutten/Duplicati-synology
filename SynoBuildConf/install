@@ -14,9 +14,6 @@ create_package_tgz() {
 	local package_tgz_dir=/tmp/_package_tgz
 	local binary_dir=$package_tgz_dir/usr/local/bin
 
-	pwd
-	ls -l
-
 	### clear destination directory
 	rm -rf $package_tgz_dir && mkdir -p $package_tgz_dir
 
@@ -24,11 +21,7 @@ create_package_tgz() {
 	unzip -q -d "${package_tgz_dir}" "duplicati.zip"
 	status=$?
 	echo "Unzip status ${status}"
-	echo "Zip size $(du -h duplicati.zip)"
-	echo "Unzip size $(du -hs ${package_tgz_dir})"
 	ls /tmp/_package_tgz
-	#mkdir -p $binary_dir
-	# mkdir "WIZARD_UIFILES" # Not used, but need to exist
 
 	# Install extra items for Synology
 	cp -av web-extra/* $package_tgz_dir/webroot/
@@ -63,7 +56,6 @@ create_spk(){
 
 	./INFO.sh > INFO
 	echo "version=\"$(cat VERSION)\"" >> INFO
-	# echo "version=\"2.0.6-0001\"" >> INFO
 	cp INFO $PKG_DIR/INFO
 
 	### Create the final spk.
