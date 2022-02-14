@@ -42,8 +42,6 @@ PID_FILE="${PACKAGE_DIR}/${PACKAGE_NAME_SIMPLE}.pid"
 DaemonStart() {
 	DaemonStatus
 	if [ $? == 0 ]; then
-		echo "Starting ${PACKAGE_NAME_SIMPLE}."> $SYNOPKG_TEMP_LOGFILE
-
 		SYNO_DSM_AUTH=${SYNO_DSM_AUTH} \
 		SYNO_SKIP_XSRF=${SYNO_SKIP_XSRF} \
 		SYNO_ALL_USERS=${SYNO_ALL_USERS} \
@@ -52,13 +50,10 @@ DaemonStart() {
 		TMP_DIR="${SYNOPKG_PKGTMP}" \
 		TEMP="${SYNOPKG_PKGTMP}" \
 		mono "${PACKAGE_DIR}/Duplicati.Server.exe" --webservice-interface=any --webservice-port=8200 &
-		echo $! > "$PID_FILE"		
-
-		echo "Duplicati started with PID file ${PID_FILE}" > "$SYNOPKG_TEMP_LOGFILE"
-		echo "Server log ${SYNOPKG_PKGTMP}/server.log" > $SYNOPKG_TEMP_LOGFILE
-
+		echo $! > "$PID_FILE"
+		echo "${SYNOPKG_PKGNAME} v${SYNOPKG_PKGVER} started with PID $(cat "${PID_FILE}")" >> "$SYNOPKG_TEMP_LOGFILE"
 	else
-		echo "${PACKAGE_NAME_SIMPLE} already running." > $SYNOPKG_TEMP_LOGFILE
+		echo "${SYNOPKG_PKGNAME} is already running." >> $SYNOPKG_TEMP_LOGFILE
 	fi
 }
 
