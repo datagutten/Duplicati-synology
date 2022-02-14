@@ -20,7 +20,12 @@ create_package_tgz() {
 	### install needed file into PKG_DIR
 	unzip -q -d "${package_tgz_dir}" "duplicati.zip"
 	status=$?
-	echo "Unzip status ${status}"
+
+	if [ $status != 0 ]; then
+	  echo "[ERROR] Unzip failed with return code $status"
+	  exit $status
+  fi
+
 	ls /tmp/_package_tgz
 
 	# Install extra items for Synology
