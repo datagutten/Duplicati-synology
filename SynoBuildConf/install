@@ -24,6 +24,8 @@ create_package_tgz() {
 	unzip -q -d "${package_tgz_dir}" "duplicati.zip"
 	status=$?
 	echo "Unzip status ${status}"
+	echo "Zip size $(du -h duplicati.zip)"
+	echo "Unzip size $(du -hs ${package_tgz_dir})"
 	ls /tmp/_package_tgz
 	#mkdir -p $binary_dir
 	mkdir "WIZARD_UIFILES" # Not used, but need to exist
@@ -45,6 +47,7 @@ create_package_tgz() {
 	rm -rf $package_tgz_dir/storj_uplink.dll
 	rm -rf $package_tgz_dir/libstorj_uplink.dylib
 
+  echo "package.tgz final size $(du -hs ${package_tgz_dir})"
 	### create package.tgz $1: source_dir $2: dest_dir
 	pkg_make_package $package_tgz_dir "${PKG_DIR}"
 }
