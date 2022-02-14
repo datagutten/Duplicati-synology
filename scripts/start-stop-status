@@ -1,5 +1,4 @@
 #!/bin/sh
-#source /root/.profile  # Get Environment Variables from Root Profile
 
 if ! type mono 2>/dev/null; then
     for d in /volume*/@appstore/mono; do
@@ -23,9 +22,6 @@ PACKAGE_NAME_SIMPLE="$(echo "$SYNOPKG_PKGNAME" | awk '{print tolower($0)}' | sed
 PACKAGE_DIR="${SYNOPKG_PKGDEST}"
 PACKAGE_UPGRADE_FLAG="/tmp/${PACKAGE_NAME_SIMPLE}.upgrade"
 
-# We need more space than what /tmp holds
-# PACKAGE_TEMP_DIR="${PACKAGE_DIR}/temp"
-
 # These control how the authentication is integrated
 SYNO_LOGIN_CGI=/usr/syno/synoman/webman/login.cgi
 SYNO_AUTHENTICATE_CGI=/usr/syno/synoman/webman/modules/authenticate.cgi
@@ -48,8 +44,6 @@ DaemonStart() {
 	if [ $? == 0 ]; then
 		echo "Starting ${PACKAGE_NAME_SIMPLE}."> $SYNOPKG_TEMP_LOGFILE
 
-		# mkdir -p "${PACKAGE_TEMP_DIR}"
-
 		SYNO_DSM_AUTH=${SYNO_DSM_AUTH} \
 		SYNO_SKIP_XSRF=${SYNO_SKIP_XSRF} \
 		SYNO_ALL_USERS=${SYNO_ALL_USERS} \
@@ -60,7 +54,6 @@ DaemonStart() {
 		mono "${PACKAGE_DIR}/Duplicati.Server.exe" --webservice-interface=any --webservice-port=8200 &
 		echo $! > "$PID_FILE"		
 
-		# cp -f ${PACKAGE_DIR}/dsm.duplicati.conf /usr/local/etc/nginx/conf.d/
 		echo "Duplicati started with PID file ${PID_FILE}" > "$SYNOPKG_TEMP_LOGFILE"
 		echo "Server log ${SYNOPKG_PKGTMP}/server.log" > $SYNOPKG_TEMP_LOGFILE
 
@@ -79,8 +72,6 @@ DaemonStop() {
 		echo "Stopping ${PACKAGE_NAME_SIMPLE}."
 		pkill -P $(cat "$PID_FILE")
 		rm -f "$PID_FILE"
-		
-		# rm -f /usr/local/etc/nginx/conf.d/dsm.duplicati.conf
 
 		sleep 3
 	else
