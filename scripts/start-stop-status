@@ -5,10 +5,16 @@ if ! type mono 2>/dev/null; then
     for d in /volume*/@appstore/mono; do
         if [ -x "$d/bin/mono" ]; then
             PATH="$PATH:$d/bin"
+            MONO_PATH="$d/bin/mono"
             export PATH
             break
         fi
     done
+fi
+
+if ! test -n "${MONO_PATH-}"; then
+  echo "Mono not found" > "$SYNOPKG_TEMP_LOGFILE"
+  exit 1
 fi
 
 # Package Varables
