@@ -28,7 +28,7 @@ create_package_tgz() {
 	echo "Unzip size $(du -hs ${package_tgz_dir})"
 	ls /tmp/_package_tgz
 	#mkdir -p $binary_dir
-	mkdir "WIZARD_UIFILES" # Not used, but need to exist
+	# mkdir "WIZARD_UIFILES" # Not used, but need to exist
 
 	# Install extra items for Synology
 	cp -av web-extra/* $package_tgz_dir/webroot/
