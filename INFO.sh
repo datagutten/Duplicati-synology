@@ -17,7 +17,7 @@ install_dep_services="mono"
 start_dep_services="mono"
 description="Use Duplicati to backup your data to cloud services"
 
-# version="1.0.0-0001"
+version="1.0.0-0001"
 os_min_ver="7.0-40000"
 dsmuidir="webroot"
 
