@@ -43,7 +43,7 @@ jobs:
         working-directory: 'build/source/Duplicati/build_scripts'
 
       - name: Download zip
-        run: wget -O duplicati.zip $ZIP_URL
+        run: wget --no-verbose -O duplicati.zip $ZIP_URL
         working-directory: 'build/source/Duplicati'
 
       - name: Deploy build environment
